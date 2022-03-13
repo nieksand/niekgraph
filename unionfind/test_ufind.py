@@ -22,7 +22,7 @@ class UnionFindTests(unittest.TestCase):
 
     def test_initial_sets(self):
         """
-        Initially every element has unique set. 
+        Initially every element has unique set.
         """
         n = 10
         uf = UnionFind(n)
