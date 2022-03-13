@@ -34,8 +34,8 @@ class AdjList:
 
     def adjacencies(self) -> Iterable[Tuple[Node, List[Node]]]:
         """
-        Get iterator over adjacencies.
+        Iterate over all adjacencies.
 
-        Returns iterator emitting (src edge, [...dst edges]) tuples.
+        Returns iterator of (src node, [..dst nodes..]) tuples.
         """
         return self.adjlist.items()
