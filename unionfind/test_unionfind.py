@@ -3,7 +3,7 @@ Tests for ufind module.
 """
 import unittest
 
-from ufind import UnionFind
+from .unionfind import UnionFind
 
 
 class UnionFindTests(unittest.TestCase):
@@ -11,7 +11,7 @@ class UnionFindTests(unittest.TestCase):
     Tests for ufind module.
     """
 
-    def test_bad_ctor(self):
+    def test_bad_ctor(self) -> None:
         """
         Invalid element count should raise.
         """
@@ -20,7 +20,7 @@ class UnionFindTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             UnionFind(-1)
 
-    def test_initial_sets(self):
+    def test_initial_sets(self) -> None:
         """
         Initially every element has unique set.
         """
@@ -31,7 +31,7 @@ class UnionFindTests(unittest.TestCase):
         for idx in range(n):
             self.assertEqual(uf.find(idx), idx)
 
-    def test_union_self(self):
+    def test_union_self(self) -> None:
         """
         Union of set against self is no-op.
         """
@@ -39,7 +39,7 @@ class UnionFindTests(unittest.TestCase):
         self.assertEqual(uf.num_sets(), 3)
 
         # expected sets: {0,1} {2}
-        def unions_consistent():
+        def unions_consistent() -> None:
             self.assertEqual(uf.num_sets(), 2)
             self.assertEqual(uf.find(0), uf.find(1))
             self.assertNotEqual(uf.find(0), uf.find(2))
@@ -50,7 +50,7 @@ class UnionFindTests(unittest.TestCase):
         uf.union(1, 0)
         unions_consistent()
 
-    def test_depth_growth_shallow(self):
+    def test_depth_growth_shallow(self) -> None:
         """
         Merging single element sets should max at 2 levels.
         """
@@ -69,7 +69,7 @@ class UnionFindTests(unittest.TestCase):
                 depth += 1
             self.assertLess(depth, 2)
 
-    def test_depth_worst_case(self):
+    def test_depth_worst_case(self) -> None:
         """
         Worst case expects depth O(lg n).
         """
@@ -94,7 +94,7 @@ class UnionFindTests(unittest.TestCase):
                 depth += 1
             self.assertLessEqual(depth, 3)
 
-    def test_visualize(self):
+    def test_visualize(self) -> None:
         """
         Verify line count equals set count.
         """
