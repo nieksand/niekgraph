@@ -68,7 +68,7 @@ class UnionFind:
         This inefficient call is intended for debugging purposes. It generates
         output rows like:
 
-            (depth 0 elements) ... (depth 1 elements)
+            d_0=(depth 0 elements) ... d_n=(depth n elements)
         """
         # gather depth and element by set id
         groups: Dict[int, Dict[int, List[int]]] = {}
