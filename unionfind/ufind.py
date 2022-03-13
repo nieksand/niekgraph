@@ -1,24 +1,29 @@
 """
-Basic Union Find Implementation
+Union-Find data structure.
 """
+from io import StringIO
 
 
 class UnionFind:
     """
-    Basic Union Find Implementation
+    Union-Find data structure.
+
+    It allows for O(log n) membership lookups and O(1) unions.
     """
 
-    def __init__(self, n):
+    def __init__(self, n: int):
         """
         Initialize.
 
         `n`: number of elements to track.
         """
+        if n <= 0:
+            raise ValueError('invalid element count')
+
         self.parents = list(range(n))
-        self.child_sz = [1] * n
+        self.set_sz = [1] * n
 
-
-    def find(self, idx):
+    def find(self, idx: int) -> int:
         """
         Find set id for element.
 
@@ -30,7 +35,7 @@ class UnionFind:
             idx = self.parents[idx]
         return idx
 
-    def union(self, a, b):
+    def union(self, a: int, b: int) -> None:
         """
         Union of two sets.
 
@@ -45,12 +50,44 @@ class UnionFind:
         if a == b:
             return
 
-        parent, child = (a, b) if self.child_sz[a] > self.child_sz[b] else (b, a)
+        parent, child = (a, b) if self.set_sz[a] > self.set_sz[b] else (b, a)
         self.parents[child] = parent
-        self.child_sz[parent] += self.child_sz[child]
+        self.set_sz[parent] += self.set_sz[child]
 
-    def num_sets(self):
+    def num_sets(self) -> int:
         """
         Count number of sets.
         """
         return sum(1 for i, v in enumerate(self.parents) if i==v)
+
+    def visualize(self) -> str:
+        """
+        Visualize sets.
+
+        This inefficient call is intended for debugging purposes. It generates
+        output rows like:
+
+            (depth 0 elements) ... (depth 1 elements)
+        """
+        # gather depth and element by set id
+        groups = {}
+        for i in range(len(self.parents)):
+            depth = 0
+            j = i
+            while self.parents[j] != j:
+                j = self.parents[j]
+                depth += 1
+
+            grp = groups.setdefault(j, {})
+            grp.setdefault(depth, []).append(i)
+
+        with StringIO() as buf:
+            for group in groups.values():
+                for depth, elements in sorted(group.items()):
+                    elements.sort()
+                    buf.write(f'd_{depth}=(')
+                    buf.write(','.join(str(e) for e in elements))
+                    buf.write(') ')
+                buf.write('\n')
+
+            return buf.getvalue()
