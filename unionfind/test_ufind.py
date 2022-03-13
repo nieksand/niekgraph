@@ -101,5 +101,4 @@ class UnionFindTests(unittest.TestCase):
         uf = UnionFind(4)
         uf.union(1,3)
         self.assertEqual(uf.num_sets(), 3)
-        print(uf.visualize())
-        self.assertEqual(uf.visualize().split('\n'), 3)
+        self.assertEqual(uf.visualize().count('\n'), 3)

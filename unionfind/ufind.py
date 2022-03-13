@@ -2,6 +2,7 @@
 Union-Find data structure.
 """
 from io import StringIO
+from typing import Dict, List
 
 
 class UnionFind:
@@ -70,7 +71,7 @@ class UnionFind:
             (depth 0 elements) ... (depth 1 elements)
         """
         # gather depth and element by set id
-        groups = {}
+        groups: Dict[int, Dict[int, List[int]]] = {}
         for i in range(len(self.parents)):
             depth = 0
             j = i
