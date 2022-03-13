@@ -32,6 +32,16 @@ class AdjList:
         if not self.is_directed:
             self.adjlist[dst].append(src)
 
+    def neighbors(self, src: Node) -> List[Node]:
+        """
+        Get neighbors for node.
+
+        `src`: source node
+
+        Returns list of neighbor nodes.
+        """
+        return self.adjlist.get(src, [])
+
     def adjacencies(self) -> Iterable[Tuple[Node, List[Node]]]:
         """
         Iterate over all adjacencies.

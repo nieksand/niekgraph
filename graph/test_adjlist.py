@@ -11,7 +11,7 @@ class AdjListTests(unittest.TestCase):
     Test for adjlist module.
     """
 
-    def test_add_edge_directed(self):
+    def test_add_edge_directed(self) -> None:
         """
         Directed graphs add adjacency in one direction.
         """
@@ -21,7 +21,7 @@ class AdjListTests(unittest.TestCase):
         alist.add_edge(0, 1)
         self.assertEqual(len(alist.adjacencies()), 1)
 
-    def test_add_edge_undirected(self):
+    def test_add_edge_undirected(self) -> None:
         """
         Undirected graphs add adjacency in both directions.
         """
@@ -31,7 +31,7 @@ class AdjListTests(unittest.TestCase):
         alist.add_edge(0, 1)
         self.assertEqual(len(alist.adjacencies()), 2)
 
-    def test_adjacencies(self):
+    def test_adjacencies(self) -> None:
         """
         Expect iterable over src to dst lists.
         """
