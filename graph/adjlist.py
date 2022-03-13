@@ -2,7 +2,10 @@
 Adjacency list for graph.
 """
 from collections import defaultdict
-from typing import Any, DefaultDict, Iterator, List, Tuple
+from typing import DefaultDict, Hashable, Iterable, List, Union, Tuple
+
+
+Node = Union[Hashable, int]
 
 
 class AdjList:
@@ -12,27 +15,27 @@ class AdjList:
 
     def __init__(self, *, is_directed: bool):
         """
-        Initialize.    
+        Initialize.
         """
         self.is_directed = is_directed
 
-        self.adjacencies: DefaultDict[Any, List[Any]] = defaultdict(list)
+        self.adjlist: DefaultDict[Node, List[Node]] = defaultdict(list)
 
-    def add_edge(self, src: Any, dst: Any) -> None:
+    def add_edge(self, src: Node, dst: Node) -> None:
         """
         Add edge to graph.
 
         `src`: source node
         `dst`: destination node
         """
-        self.adjacencies[src].append(dst)
+        self.adjlist[src].append(dst)
         if not self.is_directed:
-            self.adjacencies[dst].append(src)
+            self.adjlist[dst].append(src)
 
-    def adjacencies(self) -> Iterator[Tuple[Any, List[Any]]]:
+    def adjacencies(self) -> Iterable[Tuple[Node, List[Node]]]:
         """
         Get iterator over adjacencies.
 
         Returns iterator emitting (src edge, [...dst edges]) tuples.
         """
-        return self.adjacencies.items()
+        return self.adjlist.items()
