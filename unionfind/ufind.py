@@ -9,7 +9,7 @@ class UnionFind:
     """
     Union-Find data structure.
 
-    It allows for O(log n) membership lookups and O(1) unions.
+    It allows for O(log n) membership lookups and O(log n) unions.
     """
 
     def __init__(self, n: int):
