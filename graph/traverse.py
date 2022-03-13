@@ -32,8 +32,7 @@ def dfs(alist: AdjList, src: Node, visit_fn: VisitFn) -> None:
         visit_fn(node)
         visited.add(node)
 
-        for neighbor in alist.neighbors(node):
-            work.append(neighbor)
+        work.extend(alist.neighbors(node))
 
 
 def bfs(alist: AdjList, src: Node, visit_fn: VisitFn) -> None:
@@ -58,5 +57,4 @@ def bfs(alist: AdjList, src: Node, visit_fn: VisitFn) -> None:
         visit_fn(node)
         visited.add(node)
 
-        for neighbor in alist.neighbors(node):
-            work.append(neighbor)
+        work.extend(alist.neighbors(node))
